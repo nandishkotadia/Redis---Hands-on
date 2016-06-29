@@ -1,0 +1,42 @@
+Insert data:
+
+eg: http://localhost:8080/redis/data
+POST
+Content-Type : application/json
+[{
+    "username":"nandish",
+    "name":"Nandish Kotadia",
+    "age":20
+}]
+
+Retrieve Data:
+http://localhost:8080/redis/data/{username}
+
+eg: http://localhost:8080/redis/data/nandish
+GET
+
+Sample Response:
+{
+  "username": "nandish",
+  "name": "Nandish Kotadia",
+  "age": 20
+}
+
+Update Data:
+http://localhost:8080/redis/data/{username}
+
+eg: http://localhost:8080/redis/data/nandish
+PUT
+Content-Type : application/json
+
+{
+  "username": "nandish",
+  "name": "Nandish Kotadia",
+  "age": 21
+}
+
+Delete Data:
+http://localhost:8080/redis/data/{username}
+
+eg: http://localhost:8080/redis/data/nandish
+DELETE
