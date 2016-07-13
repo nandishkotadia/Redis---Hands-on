@@ -117,6 +117,7 @@ public class RedisCacheUtilServiceImpl<T> /*implements RedisCacheUtilService<T>*
 						logger.info("Max request limit reached.. Please try after some time");
 						return "MAX_LIMIT_REACHED";
 					}
+					logger.info("Current count for clientId: "+clientId  +" is "+ count);
 					operations.multi();
 					operations.opsForZSet().add("API-"+clientId.toString(), (now+""),now); //add the current into time window
 					operations.exec();

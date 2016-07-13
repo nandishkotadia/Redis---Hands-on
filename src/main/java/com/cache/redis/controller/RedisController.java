@@ -2,18 +2,20 @@ package com.cache.redis.controller;
 
 import java.util.List;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.cache.redis.model.SampleData;
 import com.cache.redis.service.RedisService;
+import com.cache.redis.util.RedisCacheUtilServiceImpl;
 
 /**
  * @author Nandish Kotadia
@@ -27,7 +29,9 @@ public class RedisController {
 	@Autowired
 	RedisService redisService;
 	
-	//private static final Logger logger = LoggerFactory.getLogger(RedisController.class);
+	@SuppressWarnings("rawtypes")
+	@Autowired
+	RedisCacheUtilServiceImpl redisUtility;
 	
 	/**
 	 * 
@@ -62,5 +66,30 @@ public class RedisController {
 		//logger.info("Starting saveData() RedisController.");
 		Boolean flag = redisService.deleteData(username);
 		return flag;
+	}
+	
+	
+	/**
+	 * To Test RateLimit
+	 * currently the parameters are set to the following values:
+	 *  		 timewindow = 10 seconds
+	 *           limit = 3 request
+	 * i.e. User can make 3 hits/requests in a time window of 10 seconds.
+	 * 
+	 * @param username
+	 * @param clientId
+	 * @return
+	 */
+	@RequestMapping(value = "/ratelimit/{username}", method = RequestMethod.GET)
+	@ResponseBody
+	public ResponseEntity<SampleData> testRatelimit(@PathVariable String username,@RequestParam Long clientId) {
+		//logger.info("Starting saveData() RedisController.");
+		//API Rate Limit check
+		String status = redisUtility.checkIfRateLimitReached(clientId);
+		if("MAX_LIMIT_REACHED".equals(status)){
+			return new ResponseEntity<SampleData>(HttpStatus.FORBIDDEN);
+		}
+		SampleData sampleData = redisService.getData(username);
+		return new ResponseEntity<SampleData>(sampleData,HttpStatus.OK);
 	}
 }

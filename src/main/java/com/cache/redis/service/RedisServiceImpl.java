@@ -13,6 +13,7 @@ import com.cache.redis.util.RedisCacheUtilServiceImpl;
 @Service
 public class RedisServiceImpl implements RedisService{
 
+	@SuppressWarnings("rawtypes")
 	@Autowired
 	RedisCacheUtilServiceImpl redisUtility;
 	
