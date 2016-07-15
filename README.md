@@ -97,10 +97,10 @@ Step 3:
 
 	To test Redis Ratelimit
 	Api url: http://localhost:8080/redis/data/ratelimit/nandish?clientId=24
-		HttpMethod : GET
+	HttpMethod : GET
 		
-		clientId - client id for the client to from which client the request is coming.
-		This can be obtained from session in the ideal scenario.
+	clientId - client id for the client to from which client the request is coming.
+	This can be obtained from session in the ideal scenario.
 
 	Try hitting the above API continuously many times 
 	(when it will have more than 3 times in time window 10 seconds, and you will receive 403 (FORBIDDEN) in 	response 
