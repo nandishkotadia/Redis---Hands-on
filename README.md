@@ -107,4 +107,7 @@ Step 3:
 	Try hitting the above API continuously many times 
 	(when it will have more than 3 times in time window 10 seconds, and you will receive 403 (FORBIDDEN) in 	response 
 	and on 	eclipse you can see the “Max limit reached “ text. )
+
+
+##Note: It can also be used to store session which is most frequently used for every API request. Also constant and most frequently used data like Country-State-pincode data, Top 5 post of user, Recent ’n’ tweets of user, etc.  
  
