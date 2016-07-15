@@ -7,35 +7,35 @@ In order to achieve its outstanding performance, Redis works with an in-memory d
 Redis also supports trivial-to-setup master-slave asynchronous replication, with very fast non-blocking first synchronization, auto-reconnection with partial resynchronization on net split.
 
 Other features include:
-Transactions
-Pub/Sub
-Lua scripting
-Keys with a limited time-to-live
-LRU eviction of keys
-Automatic failover
+####Transactions
+####Pub/Sub
+####Lua scripting
+####Keys with a limited time-to-live
+####LRU eviction of keys
+####Automatic failover
 
 ###Code walkthrough:
 
 The data structure I have used is basic opsForHash redisOperation.
-It can 2 keys:
+It can have 2 keys and a data:
 i) primary key ii) secondary key iii) data
 
 To explain this in simple way w.r.t SQL 
 Consider following example:
 
 Suppose there is user table, with userId as the primary key
-Case 1: To retrieve all user records,
+####Case 1: To retrieve all user records,
 SQL query will be  
-SELECT * FROM User;
+####SELECT * FROM User;
 
-Case 2: To retrieve user record by userId,
+####Case 2: To retrieve user record by userId,
 SQL query will be 
-SELECT * FROM User WHERE userId = ?
+####SELECT * FROM User WHERE userId = ?
 
 So similarly above data can be stored in redis in similar way
 
-Primary key    Secondary key   Data
-User      	userId		 entire SQL row i.e user object
+####Primary key    Secondary key   Data
+####User      	userId		 entire SQL row i.e user object
 
 To run case 1:
 query will by like find by primary key.
@@ -49,9 +49,9 @@ query will be like find by primary key & secondary key.
 It provides the wrapper for the CRUD operations in REDIS. It requires the data to be passed in RedisParam.java object.
 
 RedisParam.java contains the following fields:
-1) T data - data to be stored.
-2) String key - primary key for the data.
-3) String secondaryKey - secondary key for the data.
+####1) T data - data to be stored.
+####2) String key - primary key for the data.
+####3) String secondaryKey - secondary key for the data.
 
 
 Also, it provides the rate limit utility method to perform rate limiting using sliding time window,
@@ -77,11 +77,13 @@ Step 2:
 	2.2) Retrieve (Get)
 		Api url: http://localhost:8080/redis/data/:username
 		HttpMethod : GET
+
 	2.3) Update)
 		Api url: http://localhost:8080/redis/data/:username
 		HttpMethod : PUT
 		Request Body: {“username”:”nandish”,”age”:22,”name”:”Nandish dream Kotadia”}
 		HttpHeaders: Content-Type : application/json
+
 	2.4) DELETE
 		Api url: http://localhost:8080/redis/data/:username
 		HttpMethod : DELETE
