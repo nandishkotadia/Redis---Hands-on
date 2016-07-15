@@ -36,6 +36,7 @@ public class RedisConfiguration {
 	      return new JacksonJsonRedisSerializer<>(Object.class);
 	  }
 	
+	@SuppressWarnings("rawtypes")
 	@Bean
 	public RedisTemplate redisTemplate(RedisConnectionFactory cf) {
 		 RedisTemplate redisTemplate = new RedisTemplate();
@@ -45,6 +46,7 @@ public class RedisConfiguration {
 		return redisTemplate;
 	}
 
+	@SuppressWarnings("rawtypes")
 	@Bean
 	public RedisCacheManager cacheManager(RedisTemplate redisTemplate) {
 		RedisCacheManager redisCacheManager = new RedisCacheManager(redisTemplate);

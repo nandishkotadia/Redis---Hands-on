@@ -11,7 +11,6 @@ import org.springframework.data.redis.core.RedisOperations;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.SessionCallback;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import com.cache.redis.model.RedisParam;
 
@@ -24,7 +23,6 @@ public class RedisCacheUtilServiceImpl<T> /*implements RedisCacheUtilService<T>*
 	@Autowired
 	private RedisTemplate redisTemplate;	
 	
-	//@Override
 	@SuppressWarnings("rawtypes")
 	public void save(List<RedisParam> objectToCache) {
 		this.doProcessing(objectToCache);
@@ -45,7 +43,6 @@ public class RedisCacheUtilServiceImpl<T> /*implements RedisCacheUtilService<T>*
 		}
 	}
 	
-	//@Override
 	@SuppressWarnings("unchecked")
 	public void remove(String key, String secondaryKey){
 		try{
@@ -55,7 +52,6 @@ public class RedisCacheUtilServiceImpl<T> /*implements RedisCacheUtilService<T>*
 		}
 	}
 	
-	//@Override
 	@SuppressWarnings("unchecked")
 	public void remove(String key){
 		try{
@@ -66,7 +62,6 @@ public class RedisCacheUtilServiceImpl<T> /*implements RedisCacheUtilService<T>*
 	}
 	
 	//FlushOut Cache
-	//@Override
 	@SuppressWarnings("rawtypes")
 	public void update(List<RedisParam> updatedDto){
 		//this.removeFromCache(clientPropertyList);
@@ -85,7 +80,6 @@ public class RedisCacheUtilServiceImpl<T> /*implements RedisCacheUtilService<T>*
 		return null;
 	}
 	
-	//@Override
 	@SuppressWarnings("unchecked")
 	public T findByTableId(String key) {
 		T responseList = null;

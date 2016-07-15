@@ -19,7 +19,7 @@ public class RedisServiceImpl implements RedisService{
 	
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@Override
-	public SampleData saveData(List<SampleData> data) {
+	public void saveData(List<SampleData> data) {
 		List<RedisParam> dataCacheObjects = new ArrayList<RedisParam>();
 		for(SampleData s:data){
 			RedisParam r = new RedisParam();
@@ -29,7 +29,6 @@ public class RedisServiceImpl implements RedisService{
 			dataCacheObjects.add(r);
 		}
 		redisUtility.save(dataCacheObjects);
-		return null;
 	}
 
 	private String getSecondaryKey(String username) {
@@ -48,7 +47,7 @@ public class RedisServiceImpl implements RedisService{
 
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@Override
-	public SampleData saveData(String username, SampleData data) {
+	public void updateData(String username, SampleData data) {
 		List<RedisParam> dataCacheObjects = new ArrayList<RedisParam>();
 		RedisParam r = new RedisParam();
 		r.setKey(getPrimary());
@@ -56,13 +55,11 @@ public class RedisServiceImpl implements RedisService{
 		r.setData(data);
 		dataCacheObjects.add(r);
 		redisUtility.save(dataCacheObjects);
-		return null;
 	}
 
 	@Override
-	public Boolean deleteData(String username) {
+	public void deleteData(String username) {
 		redisUtility.remove(getPrimary(), getSecondaryKey(username));
-		return true;
 	}
 
 	

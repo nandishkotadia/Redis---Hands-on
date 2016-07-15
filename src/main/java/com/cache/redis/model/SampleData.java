@@ -6,6 +6,10 @@ import javax.validation.constraints.NotNull;
 
 public class SampleData implements Serializable{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	@NotNull
 	private String username;//unique key
 	private String name;

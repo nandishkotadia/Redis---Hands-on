@@ -6,12 +6,12 @@ import com.cache.redis.model.SampleData;
 
 public interface RedisService {
 
-	SampleData saveData(List<SampleData> data);
+	void saveData(List<SampleData> data);
 
-	SampleData getData(String email);
+	SampleData getData(String username);
 
-	SampleData saveData(String email, SampleData data);
+	void updateData(String username, SampleData data);
 
-	Boolean deleteData(String email);
+	void deleteData(String username);
 
 }

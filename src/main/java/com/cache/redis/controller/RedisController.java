@@ -38,10 +38,9 @@ public class RedisController {
 	 */
 	@RequestMapping(value = "", method = RequestMethod.POST)
 	@ResponseBody
-	public SampleData saveData(@RequestBody List<SampleData> data) {
+	public void saveData(@RequestBody List<SampleData> data) {
 		//logger.info("Starting saveData() RedisController.");
-		SampleData sampleData = redisService.saveData(data);
-		return sampleData;
+		redisService.saveData(data);
 	}
 	
 	@RequestMapping(value = "/{username}", method = RequestMethod.GET)
@@ -54,18 +53,16 @@ public class RedisController {
 	
 	@RequestMapping(value = "/{username}", method = RequestMethod.PUT)
 	@ResponseBody
-	public SampleData updateData(@PathVariable String username,@RequestBody SampleData data) {
+	public void updateData(@PathVariable String username,@RequestBody SampleData data) {
 		//logger.info("Starting saveData() RedisController.");
-		SampleData sampleData = redisService.saveData(username,data);
-		return sampleData;
+		redisService.updateData(username,data);
 	}
 	
 	@RequestMapping(value = "/{username}", method = RequestMethod.DELETE)
 	@ResponseBody
-	public Boolean deleteData(@PathVariable String username) {
+	public void deleteData(@PathVariable String username) {
 		//logger.info("Starting saveData() RedisController.");
-		Boolean flag = redisService.deleteData(username);
-		return flag;
+		redisService.deleteData(username);
 	}
 	
 	
