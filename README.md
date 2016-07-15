@@ -67,6 +67,7 @@ To test the code:
 Step 1: Run the project in tomcat server
 
 Step 2:
+
 	2.1) Create 
 		Api url: http://localhost:8080/redis/data
 		HttpMethod : POST
