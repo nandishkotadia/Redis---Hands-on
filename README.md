@@ -20,6 +20,8 @@ The data structure I have used is basic opsForHash redisOperation.
 It can have 2 keys and a data:
 i) primary key ii) secondary key iii) data
 
+There are various data structures supported in Redis like Set, List, SortedSet, etc. Data structure to be chosen should be based on your use case scenario.
+
 To explain this in simple way w.r.t SQL 
 Consider following example:
 
@@ -38,7 +40,7 @@ So similarly above data can be stored in redis in similar way
 ####User      	userId		 entire SQL row i.e user object
 
 To run case 1:
-query will by like find by primary key.
+query will be like find by primary key.
 
 To run case 2:
 query will be like find by primary key & secondary key.
