@@ -101,7 +101,7 @@ Step 3:
 	Api url: http://localhost:8080/redis/data/ratelimit/nandish?clientId=24
 	HttpMethod : GET
 		
-	clientId - client id for the client to from which client the request is coming.
+	clientId - client id of the client from which client the request is coming.
 	This can be obtained from session in the ideal scenario.
 
 	Try hitting the above API continuously many times 
