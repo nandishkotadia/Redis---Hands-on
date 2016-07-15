@@ -60,6 +60,8 @@ It has 2 parameters:
 1) window - time window in ms.
 2) limit - no. of requests that can be made in that time window.  
   
+So ‘limit’ requests can be made in ‘window’ time window for a given clientId.
+
 This could be obtained from redis or some table to make it client specific and keep this parameters dynamic.
 
 To test the code:
@@ -87,3 +89,19 @@ Step 2:
 	2.4) DELETE
 		Api url: http://localhost:8080/redis/data/:username
 		HttpMethod : DELETE
+	
+	You can find this APIs in src/main/java/com/cache/redis/controller/RedisController.java
+####Note: For the people, who don’t know how to test can use Postman extension in Google Chrome. 
+
+Step 3:
+	To test Redis Ratelimit
+	Api url: http://localhost:8080/redis/data/ratelimit/nandish?clientId=24
+		HttpMethod : GET
+		
+		clientId - client id for the client to from which client the request is coming.
+		This can be obtained from session in the ideal scenario.
+
+	Try hitting the above API continuously many times 
+	(when it will have more than 3 times in time window 10 seconds, and you will receive 403 (FORBIDDEN) in 	response 
+	and on 	eclipse you can see the “Max limit reached “ text. )
+ 
