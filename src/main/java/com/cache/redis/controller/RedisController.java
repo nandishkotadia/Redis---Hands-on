@@ -79,10 +79,10 @@ public class RedisController {
 	 */
 	@RequestMapping(value = "/ratelimit/{username}", method = RequestMethod.GET)
 	@ResponseBody
-	public ResponseEntity<SampleData> testRatelimit(@PathVariable String username,@RequestParam Long clientId) {
+	public ResponseEntity<SampleData> testRatelimit(@PathVariable String username,@RequestParam Long userId) {
 		//logger.info("Starting saveData() RedisController.");
 		//API Rate Limit check
-		String status = redisUtility.checkIfRateLimitReached(clientId);
+		String status = redisUtility.checkIfRateLimitReached(userId);
 		if("MAX_LIMIT_REACHED".equals(status)){
 			return new ResponseEntity<SampleData>(HttpStatus.FORBIDDEN);
 		}

@@ -92,7 +92,7 @@ public class RedisCacheUtilServiceImpl<T> /*implements RedisCacheUtilService<T>*
 	}
 	
 	@SuppressWarnings({ "unchecked", "rawtypes" })
-	public String checkIfRateLimitReached(Long clientId) {
+	public String checkIfRateLimitReached(Long userId) {
 		try{
 			String status = (String)
 			redisTemplate.execute(new SessionCallback() {
@@ -104,16 +104,16 @@ public class RedisCacheUtilServiceImpl<T> /*implements RedisCacheUtilService<T>*
 					long currentTime = TimeUnit.MILLISECONDS.toSeconds(System.currentTimeMillis());
 					long expires = currentTime - window;
 					long now = currentTime;
-					operations.watch("API-"+clientId.toString());
-					operations.opsForZSet().removeRangeByScore("API-"+clientId.toString(),0,expires);//remove all the request which are out of timewindow
-					long count = operations.opsForZSet().zCard("API-"+clientId.toString());
+					operations.watch("API-"+userId.toString());
+					operations.opsForZSet().removeRangeByScore("API-"+userId.toString(),0,expires);//remove all the request which are out of timewindow
+					long count = operations.opsForZSet().zCard("API-"+userId.toString());
 					if(count >= limit){
 						logger.info("Max request limit reached.. Please try after some time");
 						return "MAX_LIMIT_REACHED";
 					}
-					logger.info("Current count for clientId: "+clientId  +" is "+ count);
+					logger.info("Current count for userId: "+userId  +" is "+ count);
 					operations.multi();
-					operations.opsForZSet().add("API-"+clientId.toString(), (now+""),now); //add the current into time window
+					operations.opsForZSet().add("API-"+userId.toString(), (now+""),now); //add the current into time window
 					operations.exec();
 					System.out.println(count+1);
 					return "SUCCESS";

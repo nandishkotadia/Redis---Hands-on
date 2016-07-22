@@ -62,7 +62,7 @@ It has 2 parameters:
 1) window - time window in ms.
 2) limit - no. of requests that can be made in that time window.  
   
-So ‘limit’ requests can be made in ‘window’ time window for a given clientId.
+So ‘limit’ requests can be made in ‘window’ time window for a given userId.
 
 This could be obtained from redis or some table to make it client specific and keep this parameters dynamic.
 
@@ -98,10 +98,10 @@ Step 2:
 Step 3:
 
 	To test Redis Ratelimit
-	Api url: http://localhost:8080/redis/data/ratelimit/nandish?clientId=24
+	Api url: http://localhost:8080/redis/data/ratelimit/nandish?userId=24
 	HttpMethod : GET
 		
-	clientId - client id of the client from which client the request is coming.
+	userId - user id of the user from which the request is coming.
 	This can be obtained from session in the ideal scenario.
 
 	Try hitting the above API continuously many times 
